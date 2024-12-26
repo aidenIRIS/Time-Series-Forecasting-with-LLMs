@@ -1,7 +1,7 @@
 # Time-Series-Forecasting-with-LLMs
 Time Series Forecasting with LLMs: Understanding and Enhancing Model Capabilities
 
-![Workflow](images/Workflow.png)
+![Workflow](Images/Workflow.png)
 
 #### Citation
 If you find the code is vailuable, please use this citation.
