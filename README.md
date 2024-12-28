@@ -4,6 +4,17 @@ Large language models (LLMs) have been applied in many fields and have developed
 
 ![Workflow](Images/Workflow.png)
 
+#### Datasets
+```
+Please create:
+
+datasets/memorization
+datasets/monash
+datasets/synthetic
+
+The corresponding time series dataset in the article should be placed in the above directory.
+```
+
 #### Citation
 If you find the code is vailuable, please use this citation.
 ```
