@@ -18,7 +18,7 @@ The corresponding time series dataset in the article should be placed in the abo
 #### Citation
 If you find the code is vailuable, please use this citation.
 ```
-@article{jin2024time,
+@article{tang2024time,
   title={Time series forecasting with llms: Understanding and enhancing model capabilities},
   author={Tang, Hua and Zhang, Chong and Jin, Mingyu and Yu, Qinkai and Liu, Chengzhi and Zhu, Suiyuan and Zhang, Yongfeng and Du, Mengnan},
   journal={arXiv preprint arXiv:2402.10835},
