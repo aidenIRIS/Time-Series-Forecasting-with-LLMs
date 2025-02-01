@@ -19,10 +19,14 @@ The corresponding time series dataset in the article should be placed in the abo
 #### Citation
 If you find the code is vailuable, please use this citation.
 ```
-@article{tang2024time,
+@article{tang2025time,
   title={Time series forecasting with llms: Understanding and enhancing model capabilities},
-  author={Tang, Hua and Zhang, Chong and Jin, Mingyu and Yu, Qinkai and Liu, Chengzhi and Zhu, Suiyuan and Zhang, Yongfeng and Du, Mengnan},
-  journal={arXiv preprint arXiv:2402.10835},
-  year={2024}
+  author={Tang, Hua and Zhang, Chong and Jin, Mingyu and Yu, Qinkai and Wang, Zhenting and Jin, Xiaobo and Zhang, Yongfeng and Du, Mengnan},
+  journal={ACM SIGKDD Explorations Newsletter},
+  volume={26},
+  number={2},
+  pages={109--118},
+  year={2025},
+  publisher={ACM New York, NY, USA}
 }
 ```
