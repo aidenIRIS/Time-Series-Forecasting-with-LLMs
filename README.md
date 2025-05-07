@@ -6,7 +6,7 @@ Large language models (LLMs) have been applied in many fields and have developed
 
 ![Workflow](Images/Workflow.png)
 
-### Brief Information for each file:
+## Brief Information for each file:
 - 0_baseline_experiment.ipynb and 0_baseline_experiment_w_gemini.ipynb
 These notebooks implement baseline predictions using pre-trained large language models (LLMs), including Gemini-based variants.
 - 1_stl_decomposition.ipynb
@@ -22,14 +22,14 @@ This notebook investigates how varying input sequence lengths affect model predi
 - 6_paraphrase_and_predict.ipynb
 This notebook explores a method that combines input paraphrasing with prediction to evaluate the consistency and robustness of the model.
 
-### Getting Started
+## Getting Started
 - Installation
 conda create -n time_llm python=3.10
 conda activate time_llm
 pip install -r requirements.txt
 - Enter your `api_key` and `api_base` in the `config.json` file.
 
-### Datasets
+## Datasets
 
 Please create the following directory structure:
 
@@ -43,12 +43,12 @@ datasets/
 Place the corresponding time series datasets referenced in the paper into these directories.
 
 
-### Acknowledgement
+## Acknowledgement
 
 We would like to acknowledge the following GitHub repository for providing a valuable code base:
 [Large Language Models Are Zero-Shot Time Series Forecasters](https://github.com/ngruver/llmtime)
 
-### Citation
+## Citation
 If you find the code is vailuable, please use this citation.
 ```
 @article{tang2025time,
