@@ -22,10 +22,6 @@ This notebook investigates how varying input sequence lengths affect model predi
 - 6_paraphrase_and_predict.ipynb
 This notebook explores a method that combines input paraphrasing with prediction to evaluate the consistency and robustness of the model.
 
-Here is a more professional and clear version of the **Getting Started** section:
-
----
-
 ## Getting Started
 ### Installation
 
