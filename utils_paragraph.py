@@ -1,8 +1,12 @@
 import os
 import openai
 
-openai.api_key = ''
-openai.api_base = os.environ.get("OPENAI_API_BASE", "https://api.openai.com/v1")
+with open('config.json', 'r', encoding='utf-8') as f:
+    config = json.load(f)
+
+openai.api_key = config['OPENAI_API_KEY']
+openai.api_base = config['OPENAI_API_BASE']
+
 import pandas as pd
 from data1.small_context import get_datasets
 import re

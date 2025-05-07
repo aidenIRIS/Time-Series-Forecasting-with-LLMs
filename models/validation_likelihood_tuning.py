@@ -9,12 +9,12 @@ def make_validation_dataset(train, n_val, val_length):
     """Partition the training set into training and validation sets.
 
     Args:
-        train (list): List of time series data1 for training.
+        train (list): List of time series data for training.
         n_val (int): Number of validation samples.
         val_length (int): Length of each validation sample.
 
     Returns:
-        tuple: Lists of training data1 without validation, validation data1, and number of validation samples.
+        tuple: Lists of training data without validation, validation data, and the number of validation samples.
     """
     assert isinstance(train, list), 'Train should be a list of series'
 
@@ -53,8 +53,8 @@ def get_autotuned_predictions_data(train, test, hypers, num_samples, get_predict
     The validation set is constructed on the fly by splitting the training set.
 
     Args:
-        train (list): List of time series training data1.
-        test (list): List of time series test data1.
+        train (list): List of time series training data.
+        test (list): List of time series test data.
         hypers (Union[dict, list]): Either a dictionary specifying the grid search or an explicit list of hyperparameter settings.
         num_samples (int): Number of samples to retrieve.
         get_predictions_fn (callable): Function used to get predictions based on provided hyperparameters.
@@ -66,38 +66,38 @@ def get_autotuned_predictions_data(train, test, hypers, num_samples, get_predict
     Returns:
         dict: Dictionary containing predictions, best hyperparameters, and other related information.
     """
-    if isinstance(hypers,dict):
+    if isinstance(hypers, dict):
         hypers = list(grid_iter(hypers))
     else:
-        assert isinstance(hypers, list), 'hypers must be a list or dict'
+        assert isinstance(hypers, list), 'Hypers must be a list or dict'
     if not isinstance(train, list):
         train = [train]
         test = [test]
     if n_val is None:
         n_val = len(train)
     if len(hypers) > 1:
-        val_length = min(len(test[0]), int(np.mean([len(series) for series in train])/2))
-        # 计算验证集的长度，取测试数据的长度和训练数据序列平均长度的一半中的较小值
-        train_minus_val, val, n_val = make_validation_dataset(train, n_val=n_val, val_length=val_length) # use half of train as val for tiny train sets
-        # 注意 train_minus_val, val 返回为包裹的list([[...]], 不知道为什么), n_val 表示训练集中可用来分割的数据集 (有些问题中可能不允许全部训练集都用来分隔)
-        # remove validation series that has smaller length than required val_length
+        val_length = min(len(test[0]), int(np.mean([len(series) for series in train]) / 2))
+        # Calculate validation set length, taking the smaller of test data length or half of average training data length
+        train_minus_val, val, n_val = make_validation_dataset(train, n_val=n_val, val_length=val_length)
+        # Remove validation series with smaller length than required val_length
         train_minus_val, val = zip(*[(train_series, val_series) for train_series, val_series in zip(train_minus_val, val) if len(val_series) == val_length])
         train_minus_val = list(train_minus_val)
         val = list(val)
-        if len(train_minus_val) <= int(0.9*n_val):  # 这里限定0.9作为标杆, 原始数据集可能得比较大
-            raise ValueError(f'Removed too many validation series. Only {len(train_minus_val)} out of {len(n_val)} series have length >= {val_length}. Try or decreasing val_length.')
+        if len(train_minus_val) <= int(0.9 * n_val):  # Threshold of 0.9 to ensure sufficient data
+            raise ValueError(f'Removed too many validation series. Only {len(train_minus_val)} out of {len(n_val)} series have length >= {val_length}. Try decreasing val_length.')
         val_nlls = []
+
         def eval_hyper(hyper):
             try:
                 return hyper, evaluate_hyper(hyper, train_minus_val, val, get_predictions_fn)
             except ValueError:
                 return hyper, float('inf')
-            
+
         best_val_nll = float('inf')
         best_hyper = None
         if not parallel:
             for hyper in tqdm(hypers, desc='Hyperparameter search'):
-                _,val_nll = eval_hyper(hyper)
+                _, val_nll = eval_hyper(hyper)
                 val_nlls.append(val_nll)
                 if val_nll < best_val_nll:
                     best_val_nll = val_nll
@@ -106,9 +106,9 @@ def get_autotuned_predictions_data(train, test, hypers, num_samples, get_predict
                     print(f'Hyper: {hyper} \n\t Val NLL: {val_nll:3f}')
         else:
             with ThreadPoolExecutor() as executor:
-                futures = [executor.submit(eval_hyper,hyper) for hyper in hypers]
+                futures = [executor.submit(eval_hyper, hyper) for hyper in hypers]
                 for future in tqdm(as_completed(futures), total=len(hypers), desc='Hyperparameter search'):
-                    hyper,val_nll = future.result()
+                    hyper, val_nll = future.result()
                     val_nlls.append(val_nll)
                     if val_nll < best_val_nll:
                         best_val_nll = val_nll
@@ -118,11 +118,11 @@ def get_autotuned_predictions_data(train, test, hypers, num_samples, get_predict
     else:
         best_hyper = hypers[0]
         best_val_nll = float('inf')
-    print(f'Sampling with best hyper... {best_hyper} \n with NLL {best_val_nll:3f}')
+    print(f'Sampling with best hyperparameters... {best_hyper} \n with NLL {best_val_nll:3f}')
     out = get_predictions_fn(train, test, **best_hyper, num_samples=num_samples, n_train=n_train, parallel=parallel, whether_blanket=whether_blanket, genai_key=genai_key)
-    out['best_hyper']=convert_to_dict(best_hyper)
+    out['best_hyper'] = convert_to_dict(best_hyper)
     return out
-    
+        
 
 def convert_to_dict(obj: Any) -> Any:
     if isinstance(obj, dict):

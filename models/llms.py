@@ -28,8 +28,8 @@ completion_fns = {
     'llama-7b-chat': partial(llama_completion_fn, model='7b-chat'),
     'llama-13b-chat': partial(llama_completion_fn, model='13b-chat'),
     'llama-70b-chat': partial(llama_completion_fn, model='70b-chat'),
-    'gemini-1.0-pro': partial(gemini_completion_fn, model='gemini-1.0-pro'),  # 此处假定用gpt系列的encoding方式来进行预测
-    'gemini-pro': partial(gemini_completion_fn, model='gemini-pro'),  # 这是选用的两个模型
+    'gemini-1.0-pro': partial(gemini_completion_fn, model='gemini-1.0-pro'),
+    'gemini-pro': partial(gemini_completion_fn, model='gemini-pro'),  
 }
 
 # Optional: NLL/D functions for each model
@@ -87,6 +87,6 @@ context_lengths = {
     'llama-7b-chat': 4096,
     'llama-13b-chat': 4096,
     'llama-70b-chat': 4096,
-    'gemini-1.0-pro': 4096,  # 统一用4096吧, 尽管可以用的更多, 这里先忽略
-    'gemini-pro': 4096  # 统一用4096吧, 尽管可以用的更多, 这里先忽略
+    'gemini-1.0-pro': 4096,  
+    'gemini-pro': 4096  
 }
