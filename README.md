@@ -22,15 +22,35 @@ This notebook investigates how varying input sequence lengths affect model predi
 - 6_paraphrase_and_predict.ipynb
 This notebook explores a method that combines input paraphrasing with prediction to evaluate the consistency and robustness of the model.
 
+Here is a more professional and clear version of the **Getting Started** section:
+
+---
+
 ## Getting Started
-- Installation
-conda create -n time_llm python=3.10
-conda activate time_llm
-pip install -r requirements.txt
-- Enter your `api_key` and `api_base` in the `config.json` file.
+### Installation
+
+1. Create a new Conda environment:
+
+   ```bash
+   conda create -n time_llm python=3.10
+   ```
+
+2. Activate the environment:
+
+   ```bash
+   conda activate time_llm
+   ```
+
+3. Install the required packages:
+
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+### Configuration
+Add your `api_key` and `api_base` to the `config.json` file before running any notebooks.
 
 ## Datasets
-
 Please create the following directory structure:
 
 ```
